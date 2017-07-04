@@ -5,6 +5,22 @@ $( document ).ready(function() {
     } else {
       $(this).addClass("active");
     }
+    switch ($(this).attr("id")) {
+      case "htmlLink":
+        $("#htmlArea").toggle();
+        break;
+      case "cssLink":
+        $("#cssArea").toggle();
+        break;
+      case "jsLink":
+        $("#jsArea").toggle();
+        break;
+      case "outputLink":
+        $("#outputArea").toggle();
+        break;
+      default:
+
+    }
   });
 
   var oldHtml = "";
@@ -20,6 +36,11 @@ $( document ).ready(function() {
   $("#cssArea").on("change keyup paste", function() {
 
     $("#outputArea").contents().find("head").html("<style>" + $(this).val() + "</style>");
+  });
+
+  $("#jsArea").on("change keyup paste", function() {
+    var bodyHtml = $("#outputArea").contents().find("body").html();
+    $("#outputArea").contents().find("body").html(bodyHtml + "<script type='text/javascript'>" + $(this).val() + "</script>");
   });
 
 });
